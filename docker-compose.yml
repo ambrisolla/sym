@@ -10,3 +10,5 @@ services:
       MYSQL_PORT: $MYSQL_PORT
       MYSQL_DATABASE: $MYSQL_DATABASE
       SPREADSHEETS: $SPREADSHEETS
+    volumes:
+      - /opt/sym/credentials.json:/app/credentials.json
