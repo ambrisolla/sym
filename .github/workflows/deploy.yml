@@ -1,5 +1,5 @@
 name: deploy sym
-on: workflow_dispatch
+on: push
 
 jobs:
   deploy:
