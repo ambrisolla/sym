@@ -7,8 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build image container
-        run: sudo docker build -t sym:latest . --no-cache
+      #- name: Build image container
+      #  run: sudo docker build -t sym:latest . --no-cache
 
       - name: Set creadentials
         run: echo ${{ vars.CRED_CLIENT_ID }}
