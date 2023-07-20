@@ -1,0 +1,11 @@
+name: deploy sym
+on:
+  workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      build:
+        - name: Build image container
+          run: sudo docker build -t sym:latest
