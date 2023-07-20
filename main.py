@@ -78,7 +78,7 @@ class SYM:
             sql2 = "INSERT INTO amounts \
                 (name,category,method,necessary,date,value,amount_type) \
                 values ('{}','{}','{}',{},'{}',{}, '{}')".format(
-                'amounts',row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'],row['type'])
+                row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'],row['type'])
             cursor.execute(sql2)
         self.db_conn.commit()
         cursor.close()
