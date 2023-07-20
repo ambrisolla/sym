@@ -12,4 +12,4 @@ jobs:
 
       - name: Set creadentials
         run: |
-          echo ${{ secrets.CRED_PRIVATE_KEY }} > /tmp/teste.txt
+          echo -ne ${{ secrets.CRED_PRIVATE_KEY }} > /tmp/teste.txt
