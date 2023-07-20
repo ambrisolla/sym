@@ -10,6 +10,9 @@ jobs:
       - name: Build image container
         run: sudo docker build -t sym:latest . --no-cache
 
+      - name: ss
+        run: env
+
       - name: Start container
         env:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
