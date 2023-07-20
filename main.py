@@ -71,7 +71,7 @@ class SYM:
                 table = 'income'
             sql = "INSERT INTO {} \
                 (name,category,method,necessary,date,value) \
-                values ('{}','{}','{}',{},'{}',{}, '{}')".format(
+                values ('{}','{}','{}',{},'{}',{})".format(
                 table,row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'])
             cursor.execute(sql)
 
