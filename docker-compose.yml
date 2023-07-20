@@ -2,5 +2,10 @@ services:
   sym:
     image: sym:latest
     container_name: sym
+    restart: always
     environment:
-      - name=value
+      MYSQL_HOST: ${{ vars.MYSQL_HOST }}
+      MYSQL_USER: ${{ vars.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_PORT: ${{ vars.MYSQL_PORT }}
+      MYSQL_DATABASE: ${{ vars.MYSQL_DATABASE }}
