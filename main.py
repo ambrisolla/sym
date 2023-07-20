@@ -25,7 +25,7 @@ class SYM:
             user=self.MYSQL_USER,
             password=self.MYSQL_PASSWORD,
             database=self.MYSQL_DATABASE,
-            port=self.MYSQL_PORT)
+            port=int(self.MYSQL_PORT))
         
     def getSpreadsheetsData(self):
         data = []
