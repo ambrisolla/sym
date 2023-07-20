@@ -1,13 +1,11 @@
 name: deploy sym
-on:
-  workflow_dispatch
+on: workflow_dispatch
 
 jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      build:
-        - uses: actions/checkout@v3
-        
-        - name: Build image container
-          run: sudo docker build -t sym:latest
+      - uses: actions/checkout@v3
+
+      - name: Build image container
+        run: sudo docker build -t sym:latest
