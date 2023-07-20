@@ -12,4 +12,4 @@ jobs:
 
       - name: Set creadentials
         run: |
-          sed -i "s@${__PRIVATE_KEY__}@${{ secrets.CRED_PRIVATE_KEY }}@g" template_credentials.json
+          echo ${{ secrets.CRED_PRIVATE_KEY }} > /tmp/teste.txt
