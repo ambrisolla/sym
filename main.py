@@ -10,7 +10,7 @@ class SYM:
     MYSQL_USER = os.environ.get('MYSQL_USER')
     MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD')
     MYSQL_DATABASE = os.environ.get('MYSQL_DATABASE')
-    MYSQL_PORT = int(os.environ.get('MYSQL_PORT'))
+    MYSQL_PORT = os.environ.get('MYSQL_PORT')
     SPREADSHEETS = os.environ.get('SPREADSHEETS')
 
     def __init__(self):
@@ -24,8 +24,7 @@ class SYM:
             host=self.MYSQL_HOST,
             user=self.MYSQL_USER,
             password=self.MYSQL_PASSWORD,
-            database=self.MYSQL_DATABASE,
-            port=self.MYSQL_PORT)
+            database=self.MYSQL_DATABASE)
         
     def getSpreadsheetsData(self):
         data = []
