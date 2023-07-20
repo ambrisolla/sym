@@ -11,4 +11,5 @@ jobs:
       #  run: sudo docker build -t sym:latest . --no-cache
 
       - name: Set creadentials
-        run: echo ${{ vars.CRED_CLIENT_ID }}
+        run: |
+          sed -i "s@${__PRIVATE_KEY__}@${{ secrets.CRED_PRIVATE_KEY }}@g" template_credentials.json
