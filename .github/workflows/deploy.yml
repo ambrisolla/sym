@@ -13,4 +13,8 @@ jobs:
       - name: Start container
         env:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_HOST: ${{ vars.MYSQL_HOST }}
+          MYSQL_USER: ${{ vars.MYSQL_USER }}
+          MYSQL_PORT: ${{ vars.MYSQL_PORT }}
+          MYSQL_DATABASE: ${{ vars.MYSQL_DATABASE }}
         run: sudo docker compose up -d

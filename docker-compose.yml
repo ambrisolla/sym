@@ -4,8 +4,8 @@ services:
     container_name: sym
     restart: always
     environment:
-      MYSQL_HOST: ${{ vars.MYSQL_HOST }}
-      MYSQL_USER: ${{ vars.MYSQL_USER }}
-      MYSQL_PASSWORD: ${{ vars.MYSQL_PASSWORD }}
-      MYSQL_PORT: ${{ vars.MYSQL_PORT }}
-      MYSQL_DATABASE: ${{ vars.MYSQL_DATABASE }}
+      MYSQL_HOST: ${ MYSQL_HOST }
+      MYSQL_USER: ${ MYSQL_USER }
+      MYSQL_PASSWORD: ${ MYSQL_PASSWORD }
+      MYSQL_PORT: ${ MYSQL_PORT }
+      MYSQL_DATABASE: ${ MYSQL_DATABASE }
