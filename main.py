@@ -24,7 +24,8 @@ class SYM:
             host=self.MYSQL_HOST,
             user=self.MYSQL_USER,
             password=self.MYSQL_PASSWORD,
-            database=self.MYSQL_DATABASE)
+            database=self.MYSQL_DATABASE,
+            port=self.MYSQL_PORT)
         
     def getSpreadsheetsData(self):
         data = []
@@ -72,7 +73,6 @@ class SYM:
                 (name,category,method,necessary,date,value,amount_type) \
                 values ('{}','{}','{}',{},'{}',{}, '{}')".format(
                 'amounts',row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'],row['type'])
-            print(sql)
             cursor.execute(sql)
         self.db_conn.commit()
         cursor.close()
