@@ -11,4 +11,4 @@ jobs:
         run: sudo docker build -t sym:latest . --no-cache
 
       - name: Set creadentials
-        run: echo ${{ CRED_CLIENT_ID}}
+        run: echo ${{ vars.CRED_CLIENT_ID }}
