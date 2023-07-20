@@ -4,8 +4,9 @@ services:
     container_name: sym
     restart: always
     environment:
-      MYSQL_HOST: ${ MYSQL_HOST }
-      MYSQL_USER: ${ MYSQL_USER }
-      MYSQL_PASSWORD: ${ MYSQL_PASSWORD }
-      MYSQL_PORT: ${ MYSQL_PORT }
-      MYSQL_DATABASE: ${ MYSQL_DATABASE }
+      MYSQL_HOST: $MYSQL_HOST
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_PORT: $MYSQL_PORT
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      SPREADSHEETS: $SPREADSHEETS

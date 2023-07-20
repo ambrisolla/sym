@@ -17,4 +17,5 @@ jobs:
           MYSQL_USER: ${{ vars.MYSQL_USER }}
           MYSQL_PORT: ${{ vars.MYSQL_PORT }}
           MYSQL_DATABASE: ${{ vars.MYSQL_DATABASE }}
+          SPREADSHEETS: ${{ vars.SPREADSHEETS }}
         run: sudo docker compose up -d
