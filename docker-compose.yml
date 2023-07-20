@@ -1,0 +1,6 @@
+services:
+  sym:
+    image: sym:latest
+    container_name: sym
+    environment:
+      - name=value

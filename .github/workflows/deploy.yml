@@ -9,3 +9,6 @@ jobs:
 
       - name: Build image container
         run: sudo docker build -t sym:latest . --no-cache
+
+      - name: Set creadentials
+        run: env
