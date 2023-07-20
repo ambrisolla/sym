@@ -70,10 +70,16 @@ class SYM:
             elif row['type'] == 'income':
                 table = 'income'
             sql = "INSERT INTO {} \
+                (name,category,method,necessary,date,value) \
+                values ('{}','{}','{}',{},'{}',{}, '{}')".format(
+                table,row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'])
+            cursor.execute(sql)
+
+            sql2 = "INSERT INTO amounts \
                 (name,category,method,necessary,date,value,amount_type) \
                 values ('{}','{}','{}',{},'{}',{}, '{}')".format(
                 'amounts',row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'],row['type'])
-            cursor.execute(sql)
+            cursor.execute(sql2)
         self.db_conn.commit()
         cursor.close()
 
