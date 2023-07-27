@@ -52,34 +52,19 @@ class SYM:
 
     def deleteData(self):
         cursor = self.db_conn.cursor()
-        cursor.execute('delete from income')
-        cursor.execute('delete from expense')
         cursor.execute('delete from amounts')
-        cursor.execute('ALTER TABLE income AUTO_INCREMENT = 1')
-        cursor.execute('ALTER TABLE expense AUTO_INCREMENT = 1')
         cursor.execute('ALTER TABLE amounts AUTO_INCREMENT = 1')
-
 
     def insertData(self):
         self.deleteData()
         cursor = self.db_conn.cursor()
         data = self.getSpreadsheetsData()
         for row in data:
-            if row['type'] == 'expense':
-                table = 'expense'
-            elif row['type'] == 'income':
-                table = 'income'
-            sql = "INSERT INTO {} \
-                (name,category,method,necessary,date,value) \
-                values ('{}','{}','{}',{},'{}',{})".format(
-                table,row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'])
-            cursor.execute(sql)
-
-            sql2 = "INSERT INTO amounts \
+            sql = "INSERT INTO amounts \
                 (name,category,method,necessary,date,value,amount_type) \
                 values ('{}','{}','{}',{},'{}',{}, '{}')".format(
                 row['name'],row['category'],row['method'],row['necessary'],row['date'],row['value'],row['type'])
-            cursor.execute(sql2)
+            cursor.execute(sql)
         self.db_conn.commit()
         cursor.close()
 
