@@ -27,7 +27,7 @@ jobs:
           echo "SPREADSHEETS=$SPREADSHEETS" >> .env
 
       - name: remove container
-        run: docker rm -f sym
+        run: sudo docker rm -f sym
 
       - name: Start container
         run: sudo docker compose -f docker/docker-compose.yml  --env-file=.env up -d
