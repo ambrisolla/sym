@@ -38,6 +38,11 @@ export MYSQL_PORT=""
 export SPREADSHEETS="" # Example: sheet-1,sheet-2
 ```
 
+### Sheet structure
+the sheet needs to be the same structure below:
+
+<img src='sheet.png'>
+
 ### Install python libraries
 ```bash
 pip install -r requirements.txt
