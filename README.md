@@ -37,3 +37,14 @@ export MYSQL_DATABASE=""
 export MYSQL_PORT=""
 export SPREADSHEETS="" # Example: sheet-1,sheet-2
 ```
+
+### Install python libraries
+```bash
+pip install -r requirements.txt
+```
+
+### How to use
+Put the ```credentials.json``` file into your project directory and run the following command:
+```bash
+$ python main.py
+```
