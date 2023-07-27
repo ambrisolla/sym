@@ -53,3 +53,6 @@ Put the ```credentials.json``` file into your project directory and run the foll
 ```bash
 $ python main.py
 ```
+
+## Dashboard example
+<img src='dashboard.png'>
