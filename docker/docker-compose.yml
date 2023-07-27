@@ -11,4 +11,4 @@ services:
       MYSQL_DATABASE: $MYSQL_DATABASE
       SPREADSHEETS: $SPREADSHEETS
     volumes:
-      - /opt/sym/credentials.json:/app/credentials.json
+      - ../credentials.json:/app/credentials.json
