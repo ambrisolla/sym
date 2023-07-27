@@ -9,7 +9,7 @@
 <a href='https://developers.google.com/workspace/guides/get-started'>Follow the instructions.</a>
 
 
-## Configure MySQL database
+## Configure MySQL database 
 ```sql
 CREATE DATABASE sym;
 
