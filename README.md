@@ -28,7 +28,7 @@ CREATE TABLE amounts (
 
 ```
 
-### Configure environment variables
+## Configure environment variables
 ```bash
 export MYSQL_HOST=""
 export MYSQL_USER=""
@@ -38,17 +38,17 @@ export MYSQL_PORT=""
 export SPREADSHEETS="" # Example: sheet-1,sheet-2
 ```
 
-### Sheet structure
+## Sheet structure
 the sheet needs to be the same structure below:
 
 <img src='sheet.png'>
 
-### Install python libraries
+## Install python libraries
 ```bash
 pip install -r requirements.txt
 ```
 
-### How to use
+## How to use
 Put the ```credentials.json``` file into your project directory and run the following command:
 ```bash
 $ python main.py
