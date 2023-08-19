@@ -46,6 +46,12 @@
       "id": "table",
       "name": "Table",
       "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
     }
   ],
   "annotations": {
@@ -126,7 +132,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select sum(value) as income from sym.amounts where amount_type = 'income' and $__timeFilter(date); ",
+          "rawSql": "select sum(value) as income from sym.amounts where amount_type = 'income' and $__timeFilter(date) and category in ($category);; ",
           "refId": "A",
           "sql": {
             "columns": [
@@ -284,7 +290,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select sum(value) as expense from sym.amounts where amount_type = 'expense' and $__timeFilter(date); ",
+          "rawSql": "select sum(value) as expense from sym.amounts where amount_type = 'expense' and $__timeFilter(date) and category in ($category); ",
           "refId": "A",
           "sql": {
             "columns": [
@@ -421,7 +427,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select amount_type, sum(value) from sym.amounts WHERE $__timeFilter(date) group by amount_type;",
+          "rawSql": "select amount_type, sum(value) from sym.amounts WHERE $__timeFilter(date) and category in ($category) group by amount_type;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -562,7 +568,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select date_format(date,'%Y-%m'), sum(value), amount_type from sym.amounts where $__timeFilter(date)  group by date_format(date,'%Y-%m'), amount_type order by date_format(date,'%Y-%m');",
+          "rawSql": "select date_format(date,'%Y-%m'), sum(value), amount_type from sym.amounts where $__timeFilter(date) and category in ($category)  group by date_format(date,'%Y-%m'), amount_type order by date_format(date,'%Y-%m');",
           "refId": "A",
           "sql": {
             "columns": [
@@ -604,6 +610,203 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "expense"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "income"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MYSQL_- SYM}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "select \n  date, \n  sum(value) as expense, \n  amount_type \nfrom \n  sym.amounts \nwhere \n  $__timeFilter(date) \n  and category in ($category)  \n  and amount_type = 'expense'\ngroup by \n  date;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MYSQL_- SYM}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "select \n  date, \n  sum(value) as expense, \n  amount_type \nfrom \n  sym.amounts \nwhere \n  $__timeFilter(date) \n  and category in ($category)  \n  and amount_type = 'income'\ngroup by \n  date;",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Income and Expense  ( by day )",
+      "transformations": [
+        {
+          "id": "groupingToMatrix",
+          "options": {
+            "columnField": "amount_type",
+            "rowField": "date_format(date,'%Y-%m')",
+            "valueField": "sum(value)"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MYSQL_- SYM}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -621,7 +824,7 @@
         "h": 9,
         "w": 6,
         "x": 0,
-        "y": 13
+        "y": 21
       },
       "id": 3,
       "options": {
@@ -657,7 +860,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT category, sum(value) FROM sym.amounts where $__timeFilter(date) and amount_type = 'expense' group by category;",
+          "rawSql": "SELECT category, sum(value) FROM sym.amounts where $__timeFilter(date) and amount_type = 'expense' and category in ($category) group by category;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -770,7 +973,7 @@
         "h": 9,
         "w": 18,
         "x": 6,
-        "y": 13
+        "y": 21
       },
       "id": 2,
       "options": {
@@ -804,7 +1007,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select date_format(date,'%Y-%m'), sum(value), category from sym.amounts where $__timeFilter(date) and amount_type = 'expense'  group by date_format(date,'%Y-%m'), category order by date_format(date,'%Y-%m');",
+          "rawSql": "select date_format(date,'%Y-%m'), sum(value), category from sym.amounts where $__timeFilter(date) and amount_type = 'expense' and category in ($category)  group by date_format(date,'%Y-%m'), category order by date_format(date,'%Y-%m');",
           "refId": "A",
           "sql": {
             "columns": [
@@ -900,7 +1103,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 30
       },
       "id": 7,
       "options": {
@@ -914,7 +1117,13 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "date"
+          }
+        ]
       },
       "pluginVersion": "10.0.1",
       "targets": [
@@ -926,7 +1135,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select * from sym.amounts where $__timeFilter(date) order by date desc; ",
+          "rawSql": "select * from sym.amounts where $__timeFilter(date) and category in ($category) order by date desc; ",
           "refId": "A",
           "sql": {
             "columns": [
@@ -956,16 +1165,37 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "mysql",
+          "uid": "${DS_MYSQL_- SYM}"
+        },
+        "definition": "select distinct(category) from amounts;",
+        "hide": 0,
+        "includeAll": true,
+        "label": "category",
+        "multi": true,
+        "name": "category",
+        "options": [],
+        "query": "select distinct(category) from amounts;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
   },
   "time": {
-    "from": "2023-07-01T03:00:00.000Z",
-    "to": "2023-07-28T02:59:59.000Z"
+    "from": "now-90d",
+    "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
+  "timezone": "utc",
   "title": "SYM",
   "uid": "be42bf9b-93f7-4684-ac7a-d9d5279e5d0a",
-  "version": 16,
+  "version": 26,
   "weekStart": ""
 }

@@ -1,6 +1,6 @@
 services:
   sym:
-    image: sym:latest
+    image: andrebrisolla/sym:0.5.0
     container_name: sym
     restart: always
     environment:
