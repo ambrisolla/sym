@@ -3,6 +3,7 @@ import time
 import gspread
 import mysql.connector
 from oauth2client.service_account import ServiceAccountCredentials
+import sys
 
 class SYM:
 
@@ -28,27 +29,32 @@ class SYM:
             port=self.MYSQL_PORT)
         
     def getSpreadsheetsData(self):
-        data = []
-        for spreadsheet in self.spreadsheets:
-            spreadsheet_obj = self.client.open(spreadsheet)
-            for worksheet in spreadsheet_obj.worksheets():
-                worksheet_obj = spreadsheet_obj.worksheet(worksheet.title)
-                keys = []
-                for idx,row in enumerate(worksheet_obj.get_all_values()):
-                    if idx == 0:
-                        keys = [ x for x in row if idx == 0 ]
-                    else:
-                        values = [ x for x in row if idx > 0 ]
-                        value = float(dict(zip(keys,values))['value'])
-                        date = dict(zip(keys,values))['date']
-                        _dict = dict(zip(keys,values))
-                        del _dict['value']
-                        del _dict['date']
-                        _dict['date'] = date
-                        _dict['value'] = value
-                        _dict['necessary'] = bool(_dict['date'])
-                        data.append(_dict)
-        return data
+        try:
+            data = []
+            for spreadsheet in self.spreadsheets:
+                spreadsheet_obj = self.client.open(spreadsheet)
+                for worksheet in spreadsheet_obj.worksheets():
+                    worksheet_obj = spreadsheet_obj.worksheet(worksheet.title)
+                    keys = []
+                    for idx,row in enumerate(worksheet_obj.get_all_values()):
+                        if idx == 0:
+                            keys = [ x for x in row if idx == 0 ]
+                        else:
+                            values = [ x for x in row if idx > 0 ]
+                            value = float(dict(zip(keys,values))['value'])
+                            date = dict(zip(keys,values))['date']
+                            _dict = dict(zip(keys,values))
+                            del _dict['value']
+                            del _dict['date']
+                            _dict['date'] = date
+                            _dict['value'] = value
+                            _dict['necessary'] = bool(_dict['date'])
+                            data.append(_dict)
+            return data
+        except Exception as err:
+            print(f'Error: {err}')
+            print('It is possible that your sheet has a inconsistent date.')
+            sys.exit(1)
 
     def deleteData(self):
         cursor = self.db_conn.cursor()
