@@ -54,7 +54,7 @@ class SYM:
         except Exception as err:
             print(f'Error: {err}')
             print('It is possible that your sheet has a inconsistent date.')
-            sys.exit(1)
+            pass
 
     def deleteData(self):
         cursor = self.db_conn.cursor()
